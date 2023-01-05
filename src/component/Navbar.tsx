@@ -6,7 +6,7 @@ interface webConnect {
 }
 const Navbar: React.FC<webConnect> = (props) => {
   return (
-    <nav className="bg-slate-800">
+    <nav className="bg-slate-900">
       <div className="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
         <div className="flex items-center justify-between flex-row">
           <ul className="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
@@ -24,7 +24,7 @@ const Navbar: React.FC<webConnect> = (props) => {
                 href="#"
                 className="text-gray-900 dark:text-white hover:underline"
               >
-                NFT's
+                Market
               </a>
             </li>
             <li>
@@ -32,7 +32,7 @@ const Navbar: React.FC<webConnect> = (props) => {
                 href="#"
                 className="text-gray-900 dark:text-white hover:underline"
               >
-                My Asset's
+                Asset
               </a>
             </li>
             <li>
@@ -40,7 +40,7 @@ const Navbar: React.FC<webConnect> = (props) => {
                 href="#"
                 className="text-gray-900 dark:text-white hover:underline"
               >
-                Purchase Asset's
+                Purchase
               </a>
             </li>
           </ul>
@@ -58,8 +58,8 @@ const Navbar: React.FC<webConnect> = (props) => {
                   props.Ether.account.length - 4,
                   props.Ether.account.length
                 )}`
-              : "CONNECT"}
-            <i className="ml-2 fa-solid fa-wallet"></i>
+              : window.innerWidth>=500&&"CONNECT"}
+            <i className="lg:ml-2 fa-solid fa-wallet"></i>
           </button>
         </div>
       </div>
