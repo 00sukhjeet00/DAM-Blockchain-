@@ -29,7 +29,7 @@ const Navbar: React.FC<webConnect> = (props) => {
             </li>
             <li>
               <a
-                href="#"
+                href="/assets"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Asset

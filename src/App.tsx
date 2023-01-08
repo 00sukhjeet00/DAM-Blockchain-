@@ -20,6 +20,7 @@ function App() {
     market: null,
     isLoading: false,
   });
+  console.log('Ether: ', Ether);
   const connectWeb3 = async () => {
     setEther({ ...Ether, isLoading: true });
     const account = await window.ethereum.request({

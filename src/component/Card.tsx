@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Card() {
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-slate-800 dark:border-gray-700">
+    <div className="m-2 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-slate-800 dark:border-gray-700">
       <a href="#">
         <img
           className="rounded-t-lg"
