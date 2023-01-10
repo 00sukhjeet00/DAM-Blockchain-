@@ -1,10 +1,16 @@
-import React from "react";
-import { Ether } from "../interface";
-interface webConnect {
-  connectWeb3: () => Promise<void>;
-  Ether: Ether;
-}
-const Navbar: React.FC<webConnect> = (props) => {
+import React, { useContext, useEffect } from "react";
+import { webConnect } from "../interface";
+import { EtherContext } from "../utils/EthContext";
+
+const Navbar: React.FC = () => {
+  const { Ether, connectWeb3 } = useContext(EtherContext) as webConnect;
+  console.log('Ether: ', Ether);
+  useEffect(() => {
+    if(Ether.account===""){
+      connectWeb3()
+    }
+  }, [])
+  
   return (
     <nav className="bg-slate-900">
       <div className="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
@@ -21,7 +27,7 @@ const Navbar: React.FC<webConnect> = (props) => {
             </li>
             <li>
               <a
-                href="#"
+                href="/market"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Market
@@ -47,18 +53,15 @@ const Navbar: React.FC<webConnect> = (props) => {
           <button
             type="button"
             className="focus:outline-none text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-900"
-            onClick={props.connectWeb3}
-            disabled={props.Ether.account.length ? true : false}
+            onClick={connectWeb3}
+            disabled={Ether.account.length ? true : false}
           >
-            {props.Ether.account.length
-              ? `${props.Ether.account.substring(
-                  0,
-                  4
-                )}...${props.Ether.account.substring(
-                  props.Ether.account.length - 4,
-                  props.Ether.account.length
+            {Ether.account.length
+              ? `${Ether.account.substring(0, 4)}...${Ether.account.substring(
+                  Ether.account.length - 4,
+                  Ether.account.length
                 )}`
-              : window.innerWidth>=500&&"CONNECT"}
+              : window.innerWidth >= 500 && "CONNECT"}
             <i className="lg:ml-2 fa-solid fa-wallet"></i>
           </button>
         </div>

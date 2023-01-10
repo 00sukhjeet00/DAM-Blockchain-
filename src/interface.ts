@@ -6,3 +6,7 @@ export interface Ether{
     market:ethers.Contract|null,
     isLoading:boolean
   }
+export  interface webConnect {
+    connectWeb3: () => Promise<void>;
+    Ether: Ether;
+  }

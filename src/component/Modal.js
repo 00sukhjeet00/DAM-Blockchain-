@@ -1,14 +1,22 @@
 import { create } from "ipfs-http-client";
-import { useState } from "react";
+import { Buffer } from "buffer";
+import { useContext, useState } from "react";
+import { EtherContext } from "../utils/EthContext";
+import { ethers } from "ethers";
 const auth =
-    'Basic ' + Buffer.from(INFURA_ID + ':' + INFURA_SECRET_KEY).toString('base64');
+  "Basic " +
+  Buffer.from(
+    process.env.REACT_APP_INFURA_ID +
+      ":" +
+      process.env.REACT_APP_INFURA_SECRET_KEY
+  ).toString("base64");
 const client = create({
-    host: 'ipfs.infura.io',
-    port: 5001,
-    protocol: 'https',
-    headers: {
-        authorization: auth,
-    },
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  },
 });
 export const Modal = (props) => {
   const [form, setform] = useState({
@@ -17,11 +25,11 @@ export const Modal = (props) => {
     describe: "",
     price: 1,
   });
-
+  const {Ether}=useContext(EtherContext)
   const UploadIFS = async (e) => {
     e.preventDefault();
     try {
-      const response =await client.add(e.target.files[0]);
+      const response = await client.add(e.target.files[0]);
       console.log("response: ", response);
       setform((prev) => {
         return {
@@ -29,6 +37,21 @@ export const Modal = (props) => {
           file: `https://ipfs.infura.io/ipfs/${response.path}`,
         };
       });
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  const createNFT = async () => {
+    try {
+      const response = await client.add(JSON.stringify(form));
+      console.log('response: ', response);
+      const uri = `https://ipfs.infura.io/ipfs/${response.path}`;
+      await(await Ether.nft.mint(uri)).wait()
+      const tokenID=await Ether.nft.tokenID();
+      console.log('tokenID: ', tokenID);
+      await(await Ether.nft.setApprovalForAll(Ether.market.address,true)).wait()
+      const listingPrice=ethers.utils.parseEther(form.price.toString())
+      await(await Ether.market.makeItem(Ether.nft.address,tokenID,listingPrice)).wait()
     } catch (error) {
       console.log("error: ", error);
     }
@@ -109,8 +132,9 @@ export const Modal = (props) => {
           />
         </div>
         <button
-          type="submit"
+          type="button"
           className="focus:outline-none text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-900"
+          onClick={createNFT}
         >
           Upload
         </button>
