@@ -2,9 +2,11 @@
 pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract Market is ReentrancyGuard {
     address payable public immutable feeAccount;
+    using SafeMath for uint256;
     uint256 public immutable feePercent;
     uint256 public itemCount;
     struct NFTItem {
@@ -64,7 +66,7 @@ contract Market is ReentrancyGuard {
         );
     }
     function purchaseItem(uint _id) external payable nonReentrant{
-        uint totalPrice=getTotalPrice(_id);
+        uint256 totalPrice=getTotalPrice(_id);
         NFTItem storage item=items[_id];
         require(_id>0 && _id<=itemCount,"NFT does't exist");
         require(msg.value>=totalPrice,"Not enough ether");
@@ -82,7 +84,7 @@ contract Market is ReentrancyGuard {
          msg.sender
     );
     }
-    function getTotalPrice(uint _id) view public returns(uint){
-        return items[_id].price*2;
+    function getTotalPrice(uint _id) view public returns(uint256){
+        return items[_id].price+(items[_id].price.mul(feePercent)).div(10000);
     }
 }

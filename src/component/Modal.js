@@ -34,7 +34,7 @@ export const Modal = (props) => {
       setform((prev) => {
         return {
           ...prev,
-          file: `https://ipfs.infura.io/ipfs/${response.path}`,
+          file: `https://ipfs.io/ipfs/${response.path}`,
         };
       });
     } catch (error) {
@@ -45,7 +45,7 @@ export const Modal = (props) => {
     try {
       const response = await client.add(JSON.stringify(form));
       console.log('response: ', response);
-      const uri = `https://ipfs.infura.io/ipfs/${response.path}`;
+      const uri = `https://ipfs.io/ipfs/${response.path}`;
       await(await Ether.nft.mint(uri)).wait()
       const tokenID=await Ether.nft.tokenID();
       console.log('tokenID: ', tokenID);
@@ -142,3 +142,7 @@ export const Modal = (props) => {
     </div>
   );
 };
+
+
+// 1000000000000000000/100
+//   20000000000000000

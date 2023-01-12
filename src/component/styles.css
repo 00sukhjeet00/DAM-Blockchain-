@@ -1,0 +1,14 @@
+.grad-color{
+    height: 110px;
+    background: linear-gradient(0deg, #1e2a3b,#1e2a3ba8, #1e2a3b00);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+}
+.zoom{
+    transition: 0.5s all ease-in-out;
+}
+.zoom:hover{
+    transform: scale(1.02);
+}

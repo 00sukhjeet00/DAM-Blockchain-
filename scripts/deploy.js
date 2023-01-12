@@ -6,7 +6,7 @@ async function main() {
   const nft=await NFT.deploy();
   console.log(nft.address);
   const Market=await ethers.getContractFactory("Market");
-  const market=await Market.deploy(2);
+  const market=await Market.deploy(200);
   console.log('market: ', market.address);
   saveFrontendFiles(nft,"NFT");
   saveFrontendFiles(market,"Market");

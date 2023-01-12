@@ -4,7 +4,6 @@ import { EtherContext } from "../utils/EthContext";
 
 const Navbar: React.FC = () => {
   const { Ether, connectWeb3 } = useContext(EtherContext) as webConnect;
-  console.log('Ether: ', Ether);
   useEffect(() => {
     if(Ether.account===""){
       connectWeb3()
@@ -43,7 +42,7 @@ const Navbar: React.FC = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/purchase"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Purchase
