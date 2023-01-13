@@ -16,7 +16,7 @@ export const EtherProvider :React.FC<Props>= ({children}) => {
     account:"",
     nft: null,
     market: null,
-    isLoading: false,
+    isLoading: true,
   });
   const connectWeb3 = async () => {
     setEther({ ...Ether, isLoading: true });
@@ -41,7 +41,7 @@ export const EtherProvider :React.FC<Props>= ({children}) => {
     });
   };
   return (
-    <EtherContext.Provider value={{Ether, connectWeb3}}>
+    <EtherContext.Provider value={{Ether, connectWeb3,setEther}}>
       {children}
     </EtherContext.Provider>
   );

@@ -25,12 +25,11 @@ export const Modal = (props) => {
     describe: "",
     price: 1,
   });
-  const {Ether}=useContext(EtherContext)
+  const { Ether, setEther } = useContext(EtherContext);
   const UploadIFS = async (e) => {
     e.preventDefault();
     try {
       const response = await client.add(e.target.files[0]);
-      console.log("response: ", response);
       setform((prev) => {
         return {
           ...prev,
@@ -43,15 +42,24 @@ export const Modal = (props) => {
   };
   const createNFT = async () => {
     try {
+      setEther((prev) => {
+        return { ...prev, isLoading: true };
+      });
       const response = await client.add(JSON.stringify(form));
-      console.log('response: ', response);
       const uri = `https://ipfs.io/ipfs/${response.path}`;
-      await(await Ether.nft.mint(uri)).wait()
-      const tokenID=await Ether.nft.tokenID();
-      console.log('tokenID: ', tokenID);
-      await(await Ether.nft.setApprovalForAll(Ether.market.address,true)).wait()
-      const listingPrice=ethers.utils.parseEther(form.price.toString())
-      await(await Ether.market.makeItem(Ether.nft.address,tokenID,listingPrice)).wait()
+      await (await Ether.nft.mint(uri)).wait();
+      const tokenID = await Ether.nft.tokenID();
+      await (
+        await Ether.nft.setApprovalForAll(Ether.market.address, true)
+      ).wait();
+      const listingPrice = ethers.utils.parseEther(form.price.toString());
+      await (
+        await Ether.market.makeItem(Ether.nft.address, tokenID, listingPrice)
+      ).wait();
+      setEther((prev) => {
+        return { ...prev, isLoading: false };
+      });
+      props.setmodal(false);
     } catch (error) {
       console.log("error: ", error);
     }
@@ -142,7 +150,3 @@ export const Modal = (props) => {
     </div>
   );
 };
-
-
-// 1000000000000000000/100
-//   20000000000000000

@@ -1,0 +1,28 @@
+.color {
+  background: linear-gradient(45deg, #c434f4, #4c95e5, #4c95e5,#28b5e2);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+.hero-img{
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: scale(1.2) rotate(190deg);
+}
+.hero-img-left{
+    position: absolute;
+    left: -14rem;
+    top: 0;
+    animation: 10s rotation infinite;
+}
+@keyframes rotation {
+    0%{
+        transform: scale(1.2) rotate(0deg);
+    }   
+    50%{
+        transform: scale(1.5) rotate(200deg);
+    }
+    100%{
+        transform: scale(1.2) rotate(360deg);
+    }   
+}

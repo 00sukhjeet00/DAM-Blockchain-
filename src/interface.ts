@@ -4,9 +4,10 @@ export interface Ether{
     account:string,
     nft:ethers.Contract|null,
     market:ethers.Contract|null,
-    isLoading:boolean
+    isLoading:boolean,
   }
 export  interface webConnect {
     connectWeb3: () => Promise<void>;
     Ether: Ether;
+    setEther:React.Dispatch<React.SetStateAction<Ether>>
   }
