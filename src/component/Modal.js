@@ -59,7 +59,7 @@ export const Modal = (props) => {
       setEther((prev) => {
         return { ...prev, isLoading: false };
       });
-      props.setmodal(false);
+      window.location.reload()
     } catch (error) {
       console.log("error: ", error);
     }
