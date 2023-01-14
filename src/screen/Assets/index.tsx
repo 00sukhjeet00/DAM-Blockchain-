@@ -20,10 +20,11 @@ export default function AssetScreen() {
           return { ...prev, isLoading: true };
         });
         const itemCount = await Ether?.market?.itemCount();
+        console.log('itemCount: ', itemCount);
         let _nfts = [];
         for (let i = 1; i <= itemCount; i++) {
           const item = await Ether?.market?.items(i);
-          if (item.seller == Ether.account) {
+          if (item.seller.toLowerCase() == Ether.account.toLowerCase()) {
             const uri = await Ether?.nft?.tokenURI(item.tokenID);
             const response = await fetch(uri);
             let res = await response.json();

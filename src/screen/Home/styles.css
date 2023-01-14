@@ -8,6 +8,7 @@
     right: 0;
     top: 0;
     transform: scale(1.2) rotate(190deg);
+    opacity: 0.8;
 }
 .hero-img-left{
     position: absolute;
@@ -25,4 +26,23 @@
     100%{
         transform: scale(1.2) rotate(360deg);
     }   
+}
+.hero-img-1{
+    position: absolute;
+    left: 25%;
+    top: 20%;
+    transform: scale(2.5) rotate(190deg);
+    animation: 2s glow ease-in-out infinite;
+    z-index: 0;
+}
+@keyframes glow {
+    0%{
+        opacity: 0.4;
+    }
+    50%{
+        opacity: 0.55;
+    }
+    100%{
+        opacity: 0.4;
+    }
 }

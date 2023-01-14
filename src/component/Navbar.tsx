@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   }, [])
   
   return (
-    <nav className="bg-slate-900">
+    <nav className="z-10 relative" style={{background:"#0f172a90"}}>
       <div className="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
         <div className="flex items-center justify-between flex-row">
           <ul className="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
           </ul>
           <button
             type="button"
-            className="focus:outline-none text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-5 py-2.5 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-900"
+            className="bg-color focus:outline-none text-white focus:ring-4 font-medium rounded-full text-sm px-5 py-2.5 mb-2"
             onClick={connectWeb3}
             disabled={Ether.account.length ? true : false}
           >
