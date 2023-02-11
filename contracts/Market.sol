@@ -69,11 +69,12 @@ contract Market is ReentrancyGuard {
         uint256 totalPrice=getTotalPrice(_id);
         NFTItem storage item=items[_id];
         require(_id>0 && _id<=itemCount,"NFT does't exist");
-        require(msg.value>=totalPrice,"Not enough ether");
+        // require(msg.value>totalPrice,"Not enough ether");
         require(!item.sold,"NFT Already Sold");
         item.seller.transfer(item.price);
         feeAccount.transfer(totalPrice-item.price);
         item.sold=true;
+        item.seller=payable(msg.sender);
         item.nft.transferFrom(address(this), msg.sender, item.tokenID);
         emit Bought(
          item.id,

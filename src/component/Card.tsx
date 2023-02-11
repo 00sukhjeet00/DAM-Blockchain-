@@ -15,7 +15,6 @@ export default function Card(props: {
         value: ethers.utils.parseEther(props.nft.total_price),
       })
     ).wait();
-    await new Promise(res => setTimeout(() => res(null), 5000));
   };
   return (
     <div
@@ -35,7 +34,7 @@ export default function Card(props: {
         <button
           className="w-full text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
           onClick={buyNFT}
-          disabled={props?.disable}
+          // disabled={props?.disable}
         >
           <i className="mr-2 fa-brands fa-ethereum"></i>
           {props.nft.total_price}

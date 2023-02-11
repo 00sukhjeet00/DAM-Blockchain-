@@ -4,7 +4,7 @@ export default function HomeScreen() {
   return (
     <div className="container mx-auto px-4 p-5">
       <div className="p-5" style={{ position: "relative" }}>
-        <h1 className="text-8xl text-gray-700">Well-Come</h1>
+        <h1 className="text-8xl text-slate-300">Well-Come</h1>
         <h2 className="text-9xl color">DAM</h2>
         <p className="text-gray-500">Digital Assets Marketplace</p>
         <p className="text-xs text-gray-500">(Powered By Blockchain)</p>

@@ -20,18 +20,19 @@ export default function AssetScreen() {
           return { ...prev, isLoading: true };
         });
         const itemCount = await Ether?.market?.itemCount();
-        console.log('itemCount: ', itemCount);
         let _nfts = [];
         for (let i = 1; i <= itemCount; i++) {
           const item = await Ether?.market?.items(i);
           if (item.seller.toLowerCase() == Ether.account.toLowerCase()) {
-            const uri = await Ether?.nft?.tokenURI(item.tokenID);
-            const response = await fetch(uri);
-            let res = await response.json();
-            res.total_price = ethers.utils.formatEther(
-              (await Ether.market.getTotalPrice(item.id)).toString()
-            );
-            _nfts.push(res);
+            if (!item.sold) {
+              const uri = await Ether?.nft?.tokenURI(item.tokenID);
+              const response = await fetch(uri);
+              let res = await response.json();
+              res.total_price = ethers.utils.formatEther(
+                (await Ether.market.getTotalPrice(item.id)).toString()
+                );
+                _nfts.push(res);
+              }
           }
         }
         setnfts(_nfts);

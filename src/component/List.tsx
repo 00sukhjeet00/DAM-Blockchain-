@@ -8,7 +8,7 @@ export default function List(props:{nfts:any,disable?:boolean}) {
       {
         props.nfts.length?
         props.nfts.map((nft:any,id:number)=>(
-          <Card nft={nft} id={id+1} disable={props.disable}/>
+          <Card nft={nft} key={id} id={id+1} disable={props.disable}/>
         )):null
       }
     </div>

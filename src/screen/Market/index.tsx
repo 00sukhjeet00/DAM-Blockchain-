@@ -8,7 +8,6 @@ import { EtherContext } from "../../utils/EthContext";
 
 export default function MarketScreen() {
   const { Ether, setEther } = useContext(EtherContext) as webConnect;
-  console.log('Ether: ', Ether);
   const [nfts, setnfts] = useState<any>([]);
   useEffect(() => {
     async function loadAssets() {
