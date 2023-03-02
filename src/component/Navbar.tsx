@@ -11,7 +11,7 @@ const Navbar: React.FC = () => {
   }, [])
   
   return (
-    <nav className="z-10 relative" style={{background:"#0f172a90"}}>
+    <nav className="relative" style={{background:"#0f172a90"}}>
       <div className="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
         <div className="flex items-center justify-between flex-row">
           <ul className="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">

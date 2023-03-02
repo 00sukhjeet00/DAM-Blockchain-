@@ -24,7 +24,9 @@ export const Modal = (props) => {
     file: "",
     describe: "",
     price: 1,
+    id:props.itemID
   });
+  console.log('props.itemCount: ', props.itemID);
   const { Ether, setEther } = useContext(EtherContext);
   const UploadIFS = async (e) => {
     e.preventDefault();

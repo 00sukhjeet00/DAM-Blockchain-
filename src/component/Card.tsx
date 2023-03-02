@@ -14,8 +14,9 @@ export default function Card(props: {
       await Ether?.market?.purchaseItem(props.id, {
         value: ethers.utils.parseEther(props.nft.total_price),
       })
-    ).wait();
-  };
+      ).wait();
+      window.location.reload()
+    };
   return (
     <div
       className="m-2 max-w-sm bg-white rounded-lg shadow-md dark:bg-slate-800 dark:border-gray-700"
@@ -34,7 +35,7 @@ export default function Card(props: {
         <button
           className="w-full text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
           onClick={buyNFT}
-          // disabled={props?.disable}
+          disabled={props?.disable}
         >
           <i className="mr-2 fa-brands fa-ethereum"></i>
           {props.nft.total_price}

@@ -13,6 +13,7 @@ export default function AssetScreen() {
   const [modal, setmodal] = useState<boolean>(false);
   const { Ether, setEther } = useContext(EtherContext) as webConnect;
   const [nfts, setnfts] = useState<any>([]);
+  const [itemID, setitemID] = useState(0)
   useEffect(() => {
     async function loadAssets() {
       if (Ether.market) {
@@ -20,6 +21,8 @@ export default function AssetScreen() {
           return { ...prev, isLoading: true };
         });
         const itemCount = await Ether?.market?.itemCount();
+        const id=ethers.BigNumber.from(itemCount)
+        setitemID(id.toNumber())
         let _nfts = [];
         for (let i = 1; i <= itemCount; i++) {
           const item = await Ether?.market?.items(i);
@@ -59,7 +62,7 @@ export default function AssetScreen() {
             <i className="fa-solid fa-plus"></i>
           </button>
           {nfts.length?<List nfts={nfts} disable={true} />:<Empty/>}
-          {modal && <Modal setmodal={setmodal} />}
+          {modal && <Modal setmodal={setmodal} itemID={itemID}/>}
         </>
       )}
     </div>
