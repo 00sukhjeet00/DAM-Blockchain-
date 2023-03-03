@@ -10,8 +10,9 @@ export default function Card(props: {
 }) {
   const { Ether } = useContext(EtherContext) as webConnect;
   const buyNFT = async () => {
+    console.log('nft: ', props.nft.id);
     await (
-      await Ether?.market?.purchaseItem(props.id, {
+      await Ether?.market?.purchaseItem(props.nft.id, {
         value: ethers.utils.parseEther(props.nft.total_price),
       })
       ).wait();

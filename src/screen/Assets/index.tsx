@@ -22,7 +22,7 @@ export default function AssetScreen() {
         });
         const itemCount = await Ether?.market?.itemCount();
         const id=ethers.BigNumber.from(itemCount)
-        setitemID(id.toNumber())
+        setitemID(id.toNumber()+1)
         let _nfts = [];
         for (let i = 1; i <= itemCount; i++) {
           const item = await Ether?.market?.items(i);
