@@ -24,7 +24,7 @@ export default function Card(props: {
       style={{ overflow: "hidden" }}
     >
       <div style={{ position: "relative" }}>
-        <img className="rounded-t-lg zoom" src={props.nft.file} alt="" />
+        <img className="rounded-t-lg zoom" src={props.nft.file} alt="" style={{width:"360px",height:"340px"}}/>
         <div className="grad-color"></div>
       </div>
       <div className="p-2">

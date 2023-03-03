@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { webConnect } from "../interface";
 import { EtherContext } from "../utils/EthContext";
 
@@ -16,37 +17,37 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between flex-row">
           <ul className="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
             <li style={{ marginTop: "-10px" }}>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-gray-900 dark:text-white hover:underline"
                 aria-current="page"
               >
                 <img src="/blockchain.png" width={40} />
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/market"
+              <Link
+                to="/market"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Market
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/assets"
+              <Link
+                to="/assets"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Asset
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/purchase"
+              <Link
+                to="/purchase"
                 className="text-gray-900 dark:text-white hover:underline"
               >
                 Purchase
-              </a>
+              </Link>
             </li>
           </ul>
           <button
@@ -69,3 +70,4 @@ const Navbar: React.FC = () => {
   );
 };
 export default Navbar;
+
