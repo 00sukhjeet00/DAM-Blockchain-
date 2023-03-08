@@ -16,6 +16,7 @@ contract Market is ReentrancyGuard {
         uint256 price;
         address payable seller;
         bool sold;
+        string sellerName;
     }
     event Offered(
         uint256 id,
@@ -43,7 +44,8 @@ contract Market is ReentrancyGuard {
     function makeItem(
         ERC721 _nft,
         uint256 tokenID,
-        uint256 price
+        uint256 price,
+        string memory _sellerName
     ) external nonReentrant {
         require(price > 0, "Price must bee more then 0");
         itemCount++;
@@ -54,7 +56,8 @@ contract Market is ReentrancyGuard {
             tokenID,
             price,
             payable(msg.sender),
-            false
+            false,
+            _sellerName
         );
         emit Offered(
             itemCount,

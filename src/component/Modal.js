@@ -24,9 +24,10 @@ export const Modal = (props) => {
     file: "",
     describe: "",
     price: 1,
-    id:props.itemID
+    id: props.itemID,
+    sellerName: localStorage.getItem("userName") ?? "",
   });
-  console.log('props.itemCount: ', props.itemID);
+  console.log("props.itemCount: ", props.itemID);
   const { Ether, setEther } = useContext(EtherContext);
   const UploadIFS = async (e) => {
     e.preventDefault();
@@ -56,12 +57,18 @@ export const Modal = (props) => {
       ).wait();
       const listingPrice = ethers.utils.parseEther(form.price.toString());
       await (
-        await Ether.market.makeItem(Ether.nft.address, tokenID, listingPrice)
+        await Ether.market.makeItem(
+          Ether.nft.address,
+          tokenID,
+          listingPrice,
+          form.sellerName
+        )
       ).wait();
       setEther((prev) => {
         return { ...prev, isLoading: false };
       });
-      window.location.reload()
+      localStorage.setItem("userName",form.sellerName)
+      window.location.reload();
     } catch (error) {
       console.log("error: ", error);
     }
@@ -119,6 +126,22 @@ export const Modal = (props) => {
             onChange={(e) =>
               setform((prev) => {
                 return { ...prev, describe: e.target.value };
+              })
+            }
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Seller Name
+          </label>
+          <input
+            type="text"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            value={form.sellerName}
+            onChange={(e) =>
+              setform((prev) => {
+                return { ...prev, sellerName: e.target.value };
               })
             }
             required

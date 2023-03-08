@@ -8,14 +8,17 @@ import "./styles.css";
 import { ethers } from "ethers";
 import Loading from "../../component/Loading";
 import Empty from "../../component/Empty";
+import { getEtherPrice } from "../../utils/getEtherPrice";
 
 export default function AssetScreen() {
   const [modal, setmodal] = useState<boolean>(false);
   const { Ether, setEther } = useContext(EtherContext) as webConnect;
   const [nfts, setnfts] = useState<any>([]);
   const [itemID, setitemID] = useState(0)
+  
   useEffect(() => {
     async function loadAssets() {
+      await getEtherPrice()
       if (Ether.market) {
         setEther((prev) => {
           return { ...prev, isLoading: true };

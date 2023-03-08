@@ -10,37 +10,57 @@ export default function Card(props: {
 }) {
   const { Ether } = useContext(EtherContext) as webConnect;
   const buyNFT = async () => {
-    console.log('nft: ', props.nft.id);
+    console.log("nft: ", props.nft.id);
     await (
       await Ether?.market?.purchaseItem(props.nft.id, {
         value: ethers.utils.parseEther(props.nft.total_price),
       })
-      ).wait();
-      window.location.reload()
-    };
+    ).wait();
+    window.location.reload();
+  };
   return (
     <div
       className="m-2 max-w-sm bg-white rounded-lg shadow-md dark:bg-slate-800 dark:border-gray-700"
       style={{ overflow: "hidden" }}
     >
       <div style={{ position: "relative" }}>
-        <img className="rounded-t-lg zoom" src={props.nft.file} alt="" style={{width:"360px",height:"340px"}}/>
+        <img
+          className="rounded-t-lg zoom"
+          src={props.nft.file}
+          alt=""
+          style={{ width: "360px", height: "340px" }}
+        />
         <div className="grad-color"></div>
       </div>
       <div className="p-2">
-        <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {props.nft.name}
-        </h5>
-        <p className="mb-1 text-gray-400">{props.nft.describe}</p>
+        <div className="flex flex-row items-center justify-between">
+          <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {props.nft.name.length > 12
+              ? props.nft.name.substring(0, 12)
+              : props.nft.name}
+          </h5>
+          <p className="mb-1 text-sm text-slate-400">
+            @
+            {props.nft.sellerName > 12
+              ? props.nft.sellerName.substring(0, 12)
+              : props.nft.sellerName}
+          </p>
+        </div>
+
+        <p className="mb-1 text-gray-400">
+          {props.nft.describe > 12
+            ? props.nft.describe.substring(0, 12)
+            : props.nft.describe}
+        </p>
       </div>
-        <button
-          className="w-full text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
-          onClick={buyNFT}
-          disabled={props?.disable}
-        >
-          <i className="mr-2 fa-brands fa-ethereum"></i>
-          {props.nft.total_price}
-        </button>
+      <button
+        className="w-full text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
+        onClick={buyNFT}
+        disabled={props?.disable}
+      >
+        <i className="mr-2 fa-brands fa-ethereum"></i>
+        {props.nft.total_price}
+      </button>
     </div>
   );
 }
