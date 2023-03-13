@@ -15,10 +15,10 @@ export default function AssetScreen() {
   const { Ether, setEther } = useContext(EtherContext) as webConnect;
   const [nfts, setnfts] = useState<any>([]);
   const [itemID, setitemID] = useState(0)
-  
+  const [ethPrice, setethPrice] = useState("")  
   useEffect(() => {
     async function loadAssets() {
-      await getEtherPrice()
+      setethPrice(await getEtherPrice())
       if (Ether.market) {
         setEther((prev) => {
           return { ...prev, isLoading: true };
@@ -64,8 +64,8 @@ export default function AssetScreen() {
           >
             <i className="fa-solid fa-plus"></i>
           </button>
-          {nfts.length?<List nfts={nfts} disable={true} />:<Empty/>}
-          {modal && <Modal setmodal={setmodal} itemID={itemID}/>}
+          {nfts.length?<List nfts={nfts} disable={true} ethPrice={ethPrice}/>:<Empty/>}
+          {modal && <Modal setmodal={setmodal} itemID={itemID} ethPrice={ethPrice}/>}
         </>
       )}
     </div>

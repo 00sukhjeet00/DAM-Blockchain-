@@ -7,10 +7,10 @@ export default function Card(props: {
   nft: any;
   id: number;
   disable?: boolean;
+  ethPrice:any;
 }) {
   const { Ether } = useContext(EtherContext) as webConnect;
   const buyNFT = async () => {
-    console.log("nft: ", props.nft.id);
     await (
       await Ether?.market?.purchaseItem(props.nft.id, {
         value: ethers.utils.parseEther(props.nft.total_price),
@@ -54,13 +54,17 @@ export default function Card(props: {
         </p>
       </div>
       <button
-        className="w-full text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
+        className="w-full flex justify-center text-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-color"
         onClick={buyNFT}
-        disabled={props?.disable}
+        disabled={props.nft.disable??props?.disable}
       >
         <i className="mr-2 fa-brands fa-ethereum"></i>
         {props.nft.total_price}
+        <p className="ml-2 text-gray-300">(${props.ethPrice?.toLocaleString()})</p>
       </button>
     </div>
   );
+}
+Card.defaultProps={
+  ethPrice:""
 }

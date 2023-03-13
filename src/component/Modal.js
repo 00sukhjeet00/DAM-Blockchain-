@@ -148,8 +148,9 @@ export const Modal = (props) => {
           />
         </div>
         <div className="mb-6">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white flex">
             Price
+            <p className="ml-2 text-red-600">USD: ${props.ethPrice?.toLocaleString()}</p>
           </label>
           <input
             type="number"
